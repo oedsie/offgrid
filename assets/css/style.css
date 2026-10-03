@@ -35,6 +35,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 /* Scroll-animaties: elementen verschijnen zodra ze in beeld komen (zie main.js) */
+/* Bespaarcheck: gekozen knoppen */
+.bc-opt[aria-pressed="true"]{background:#232222!important;color:#FFFFFF!important;border-color:#232222!important}
+.bc-opt[aria-pressed="true"]::before{content:"✓ "}
+.bc-opt[data-type][aria-pressed="true"]::before{content:none}
 .js .og-reveal{opacity:0;translate:0 28px;transition:opacity .7s ease,translate .7s cubic-bezier(.2,.7,.2,1)}
 .js .og-reveal.is-visible{opacity:1;translate:0 0}
 @media (prefers-reduced-motion: reduce){.js .og-reveal{opacity:1;translate:none}}
