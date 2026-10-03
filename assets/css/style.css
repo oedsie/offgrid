@@ -20,7 +20,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .og-root{--gutter:32px}
 @media (max-width: 900px){.og-navlink{display:none}}
 .og-sm{display:none}
-@media (max-width: 600px){.og-lg{display:none}.og-sm{display:inline}.og-root{--gutter:20px}.og-hdr-logo{height:34px!important}}
+@media (max-width: 600px){.og-lg{display:none}.og-sm{display:inline}.og-root{--gutter:20px}.og-hdr-logo{height:38px!important}.og-hdr-cta{padding:10px 14px!important}}
+@media (max-width: 380px){.og-hdr-logo{height:32px!important}}
 .og-faq summary{list-style:none;position:relative;padding-right:36px!important}
 .og-faq summary::-webkit-details-marker{display:none}
 .og-faq summary::after{content:"+";position:absolute;right:0;top:50%;translate:0 -50%;font-size:28px;font-weight:400;color:#0B7A4F}
