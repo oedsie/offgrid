@@ -25,18 +25,21 @@
 /* Off-grid Energiesystemen – bespaarcheck
    Pas hier de uitgangspunten aan als de energieprijzen veranderen. */
 (function () {
-  var PRIJS_STROOM = 0.27;          // € per kWh
+  var PRIJS_STROOM = 0.27;          // € per kWh, gemiddeld
   var PRIJS_GAS = 1.35;             // € per m³
   var TERUGLEVERVERGOEDING = 0.03;  // € per kWh, na het einde van de salderingsregeling
+  var PRIJSVERSCHIL = 0.10;         // € per kWh, verschil tussen dure en goedkope uren bij een dynamisch contract
+  var EV_KWH = 2500;                // kWh per jaar die een elektrische auto thuis laadt
 
   var root = document.getElementById('bespaarcheck');
-  if (!root) return;
+  if (!root || !document.getElementById('bc-range')) return;
 
+  // kwh = stroomverbruik, gas = gasverbruik, pv = opwek zonnepanelen, bat = batterij in kWh
   var types = {
-    flat:   { kwh: 2000, gas: 650,  pv: 1000 },
-    tussen: { kwh: 2700, gas: 1000, pv: 2700 },
-    hoek:   { kwh: 3000, gas: 1300, pv: 3100 },
-    vrij:   { kwh: 3600, gas: 1900, pv: 4300 }
+    flat:   { kwh: 2000, gas: 650,  pv: 1000, bat: 5 },
+    tussen: { kwh: 2700, gas: 1000, pv: 2700, bat: 8 },
+    hoek:   { kwh: 3000, gas: 1300, pv: 3100, bat: 10 },
+    vrij:   { kwh: 3600, gas: 1900, pv: 4300, bat: 12 }
   };
   var state = { type: 'tussen', has: {} };
 
@@ -46,12 +49,29 @@
   var linesEl = document.getElementById('bc-lines');
   var emptyEl = document.getElementById('bc-empty');
   document.getElementById('bc-assump').textContent =
-    '€ ' + fmt(PRIJS_STROOM) + ' per kWh, € ' + fmt(PRIJS_GAS) + ' per m³ gas en € ' + fmt(TERUGLEVERVERGOEDING) +
-    ' per kWh terugleververgoeding na het einde van de salderingsregeling op 1 januari 2027';
+    '€ ' + fmt(PRIJS_STROOM) + ' per kWh, € ' + fmt(PRIJS_GAS) + ' per m³ gas, € ' + fmt(TERUGLEVERVERGOEDING) +
+    ' per kWh terugleververgoeding na het einde van de salderingsregeling op 1 januari 2027 en voor slim regelen een dynamisch energiecontract';
 
   function fmt(n) { return n.toFixed(2).replace('.', ','); }
   function eur(n) { return '€ ' + Math.round(n).toLocaleString('nl-NL'); }
   function round(n, step) { return Math.round(n / step) * step; }
+
+  // Waarde van slim regelen, voor het systeem zoals het na het advies is
+  function ems(t, kwh, gas, has) {
+    var parts = [];
+    var wpKwh = has.wp ? t.gas * 3 : (gas > 0 ? 0.5 * gas * 2.5 : 0);
+    // 1. Zonnestroom slim inzetten: 10% van de opwek naar eigen gebruik in plaats van terugleveren
+    parts.push(['Zonnestroom zelf gebruiken', 0.10 * t.pv * (PRIJS_STROOM - TERUGLEVERVERGOEDING)]);
+    // 2. Batterij laden in goedkope uren en ontladen in dure uren: 200 cycli per jaar, 60% van de capaciteit
+    parts.push(['Batterij laden als stroom goedkoop is', 200 * 0.6 * t.bat * 0.9 * PRIJSVERSCHIL]);
+    // 3. Warmtepomp draait vaker op zonnestroom en in goedkope uren
+    if (wpKwh > 0) parts.push(['Warmtepomp op goedkope uren', wpKwh * 0.3 * PRIJSVERSCHIL]);
+    // 4. Auto laden in de goedkoopste uren en op zonnestroom
+    if (has.ev) parts.push(['Auto slim laden', EV_KWH * 0.8 * PRIJSVERSCHIL]);
+    // 5. Inzicht in verbruik en minder sluipverbruik
+    parts.push(['Inzicht en minder sluipverbruik', 0.04 * kwh * PRIJS_STROOM]);
+    return parts;
+  }
 
   function calc() {
     var t = types[state.type], has = state.has;
@@ -64,18 +84,36 @@
       0.25 * t.pv * PRIJS_STROOM + 0.75 * t.pv * TERUGLEVERVERGOEDING]);
     if (!has.bat) lines.push(['Thuisbatterij', 0.2 * t.pv * (PRIJS_STROOM - TERUGLEVERVERGOEDING)]);
     if (!has.wp && gas > 0) { var saved = 0.5 * gas; lines.push(['Hybride warmtepomp', saved * PRIJS_GAS - saved * 2.5 * PRIJS_STROOM]); }
-    if (!has.ems) lines.push([has.ev ? 'Slim regelen met EMS, inclusief slim laden' : 'Slim regelen met EMS',
-      0.03 * (kwh * PRIJS_STROOM + gas * PRIJS_GAS) + (has.ev ? 120 : 0)]);
+    if (!has.ems) {
+      var parts = ems(t, kwh, gas, has);
+      lines.push(['Slim regelen met EMS', parts.reduce(function (s, p) { return s + p[1]; }, 0), parts]);
+    }
     lines = lines.filter(function (l) { return l[1] > 0; });
     var total = lines.reduce(function (s, l) { return s + l[1]; }, 0);
 
     linesEl.innerHTML = '';
     lines.forEach(function (l) {
       var li = document.createElement('li');
-      li.style.cssText = 'display:flex;justify-content:space-between;gap:16px;padding-bottom:10px;border-bottom:1px solid rgba(28,37,55,0.2)';
+      li.style.cssText = 'padding-bottom:10px;border-bottom:1px solid rgba(28,37,55,0.2)';
+      var row = document.createElement('div');
+      row.style.cssText = 'display:flex;justify-content:space-between;gap:16px';
       var a = document.createElement('span'); a.textContent = l[0];
       var b = document.createElement('span'); b.textContent = eur(round(l[1], 10)); b.style.cssText = 'font-weight:700;white-space:nowrap';
-      li.appendChild(a); li.appendChild(b); linesEl.appendChild(li);
+      row.appendChild(a); row.appendChild(b); li.appendChild(row);
+      if (l[2]) {
+        var sub = document.createElement('ul');
+        sub.style.cssText = 'list-style:none;margin:8px 0 0;padding:0 0 0 14px;border-left:2px solid rgba(28,37,55,0.35);display:flex;flex-direction:column;gap:4px;font-size:15px';
+        l[2].forEach(function (p) {
+          if (p[1] < 5) return;
+          var s = document.createElement('li');
+          s.style.cssText = 'display:flex;justify-content:space-between;gap:16px';
+          var x = document.createElement('span'); x.textContent = p[0];
+          var y = document.createElement('span'); y.textContent = eur(round(p[1], 5)); y.style.cssText = 'white-space:nowrap';
+          s.appendChild(x); s.appendChild(y); sub.appendChild(s);
+        });
+        li.appendChild(sub);
+      }
+      linesEl.appendChild(li);
     });
     emptyEl.hidden = lines.length > 0;
     linesEl.hidden = lines.length === 0;
