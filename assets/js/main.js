@@ -72,7 +72,7 @@
     linesEl.innerHTML = '';
     lines.forEach(function (l) {
       var li = document.createElement('li');
-      li.style.cssText = 'display:flex;justify-content:space-between;gap:16px;padding-bottom:10px;border-bottom:1px solid #3A4459';
+      li.style.cssText = 'display:flex;justify-content:space-between;gap:16px;padding-bottom:10px;border-bottom:1px solid rgba(28,37,55,0.2)';
       var a = document.createElement('span'); a.textContent = l[0];
       var b = document.createElement('span'); b.textContent = eur(round(l[1], 10)); b.style.cssText = 'font-weight:700;white-space:nowrap';
       li.appendChild(a); li.appendChild(b); linesEl.appendChild(li);
