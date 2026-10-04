@@ -2,7 +2,7 @@
 body{margin:0}
 img,svg{max-width:100%}
 html{scroll-behavior:smooth}
-a{color:#1D232B}a:hover{color:#1A6E9E}
+a{color:#151A21}a:hover{color:#1A6E9E}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #1A6E9E;outline-offset:3px}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 @keyframes og-flow{to{stroke-dashoffset:-22}}
@@ -41,7 +41,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 /* Scroll-animaties: elementen verschijnen zodra ze in beeld komen (zie main.js) */
 /* Bespaarcheck: gekozen knoppen */
-.bc-opt[aria-pressed="true"]{background:#1D232B!important;color:#FFFFFF!important;border-color:#1D232B!important}
+.bc-opt[aria-pressed="true"]{background:#151A21!important;color:#FFFFFF!important;border-color:#151A21!important}
 .bc-opt[aria-pressed="true"]::before{content:"✓ "}
 .bc-opt[data-type][aria-pressed="true"]::before{content:none}
 .js .og-reveal{opacity:0;translate:0 28px;transition:opacity .7s ease,translate .7s cubic-bezier(.2,.7,.2,1)}
