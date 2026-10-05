@@ -139,3 +139,33 @@
   gasIn.addEventListener('input', calc);
   calc();
 })();
+
+/* Off-grid Energiesystemen – ankerlinks niet onder de vaste header laten vallen
+   De kop van elke sectie komt 24px onder de header te staan. */
+(function () {
+  var header = document.querySelector('header');
+  if (!header) return;
+  // positie in de pagina zonder animatie-verschuivingen (transforms tellen niet mee)
+  function top(n) { var t = 0; while (n) { t += n.offsetTop; n = n.offsetParent; } return t; }
+  function update() {
+    var h = header.offsetHeight;
+    document.querySelectorAll('#top, main [id], section[id]').forEach(function (el) {
+      if (top(el) < 2 * h) { el.style.scrollMarginTop = top(el) + 'px'; return; } // bovenaan de pagina: helemaal naar boven
+      var kop = el.querySelector('h1, h2');
+      var binnen = kop ? top(kop) - top(el) : 0;
+      el.style.scrollMarginTop = Math.round(h + 24 - binnen) + 'px';
+    });
+  }
+  update();
+  window.addEventListener('resize', update);
+  window.addEventListener('load', update);
+  // het logo (#top) gaat altijd helemaal naar boven
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href="#top"]');
+    if (!a) return;
+    e.preventDefault();
+    var smooth = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+    if (history.replaceState) history.replaceState(null, '', '#top');
+  });
+})();
