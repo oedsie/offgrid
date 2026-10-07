@@ -24,3 +24,8 @@ offgrid-website/
 2. Ga naar **Settings → Pages**.
 3. Kies bij **Source** voor *Deploy from a branch*, selecteer de branch (bijv. `main`) en de map `/ (root)`, en klik op **Save**.
 4. Na een minuut of twee staat de site op `https://<gebruikersnaam>.github.io/<repository>/`.
+
+## Nog in te vullen
+
+Zoek in `index.html` op blokhaken `[` en vul in: telefoonnummer, e-mailadres, werkgebied en KvK-nummer.
+Het contactformulier verstuurt nog niets; koppel het aan een formulierdienst zoals Formspree.
