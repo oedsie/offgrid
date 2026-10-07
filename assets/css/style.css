@@ -1,7 +1,7 @@
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0}
 img,svg{max-width:100%}
-html{scroll-behavior:smooth;scroll-padding-top:96px}
+html{scroll-behavior:smooth}
 a{color:#151A21}a:hover{color:#1A6E9E}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #1A6E9E;outline-offset:3px}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
