@@ -25,6 +25,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .og-hot{transition:border-color .2s ease}
 .og-hot span{transition:scale .2s ease}
 .og-hot:hover span{scale:1.35!important}
+.og-hot{z-index:1}
 .og-faq summary{list-style:none;position:relative;padding-right:36px!important}
 .og-faq summary::-webkit-details-marker{display:none}
 .og-faq summary::after{content:"+";position:absolute;right:0;top:50%;translate:0 -50%;font-size:28px;font-weight:400;color:#1A6E9E}
@@ -49,12 +50,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .bc-opt[data-type][aria-pressed="true"]::before{content:none}
 /* Team: hotspots en tabs */
 [hidden]{display:none!important}
-.og-tag{display:none;position:absolute;left:50%;bottom:-50px;translate:-50% 0;white-space:nowrap;font-size:15px;font-weight:700;line-height:1.2;padding:5px 12px;background:#151A21;color:#FFFFFF;box-shadow:0 4px 12px rgba(0,0,0,0.25)}
-.og-hot[aria-pressed="true"] .og-tag{display:block}
 #team-person:not([hidden]){display:flex}
 .og-dot{animation:og-pulse 2.4s ease-in-out infinite;box-shadow:0 0 0 4px rgba(22,190,125,0.35);transition:scale .2s ease}
 .og-hot:hover .og-dot{scale:1.35}
-.og-hot[aria-pressed="true"] .og-dot{animation:none;scale:1.35;box-shadow:0 0 0 5px rgba(255,255,255,0.7)}
+.og-hot[aria-pressed="true"] .og-dot{animation:none;scale:1.2;background:#FFFFFF;border-color:#16BE7D;box-shadow:0 0 0 3px #16BE7D}
+.og-hot{z-index:1}
 .og-tab[aria-selected="true"]{background:#151A21!important;color:#FFFFFF!important;border-color:#151A21!important}
 .js .og-reveal{opacity:0;translate:0 28px;transition:opacity .7s ease,translate .7s cubic-bezier(.2,.7,.2,1)}
 .js .og-reveal.is-visible{opacity:1;translate:0 0}
