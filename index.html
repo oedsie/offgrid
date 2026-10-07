@@ -11,8 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=202610071230">
-<script src="assets/js/main.js?v=202610071230" defer></script>
+<link rel="stylesheet" href="assets/css/style.css?v=202610071300">
+<script src="assets/js/main.js?v=202610071300" defer></script>
 </head>
 <body>
 <div class="og-root" style="font-family: 'Barlow', 'DIN Alternate', 'Helvetica Neue', sans-serif; color: #151A21; background: #EEF2F6; font-size: 18px; line-height: 1.55">
@@ -408,6 +408,7 @@
 <input type="hidden" name="_subject" value="Nieuwe aanvraag via offgridenergiesystemen.nl">
 <input type="hidden" name="_template" value="table">
 <input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_autoresponse" value="Bedankt voor je aanvraag bij Off-grid Energiesystemen. We hebben je bericht goed ontvangen en nemen zo snel mogelijk contact met je op om je situatie te bespreken. Heb je in de tussentijd een vraag? Beantwoord dan gewoon deze e-mail of mail naar info@offgridenergiesystemen.nl. Met vriendelijke groet, Off-grid Energiesystemen">
 <input type="hidden" name="_next" value="https://www.offgridenergiesystemen.nl/#contact">
 <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0">
 <div style="display: flex; flex-direction: column; gap: 6px">
@@ -445,6 +446,13 @@
 <p id="og-contact-status" role="status" aria-live="polite" hidden style="margin: 16px 0 0; padding: 14px 16px; font-weight: 600"></p>
 </div>
 </form>
+<div id="og-contact-done" class="og-reveal is-visible" tabindex="-1" hidden style="flex: 1 1 480px; min-width: 0; background: #FFFFFF; padding: 36px 28px; border-top: 4px solid #16BE7D; outline: none; flex-direction: column; align-items: flex-start; gap: 14px">
+<svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><rect x="10" y="10" width="36" height="36" transform="rotate(45 28 28)" fill="#16BE7D"></rect><path d="M19 28.5l6 6 12-13" fill="none" stroke="#151A21" stroke-width="4" stroke-linecap="square"></path></svg>
+<h3 style="margin: 0; font-size: 28px; line-height: 1.1; font-weight: 800">Bedankt<span id="og-done-naam"></span>, je aanvraag is verstuurd</h3>
+<p style="margin: 0; color: #3D4A5C">We hebben je bericht goed ontvangen en nemen zo snel mogelijk contact met je op voor een adviesgesprek.</p>
+<p id="og-done-mail" style="margin: 0; color: #3D4A5C"></p>
+<button type="button" id="og-contact-again" style="font: inherit; font-weight: 700; margin-top: 6px; padding: 12px 22px; min-height: 48px; cursor: pointer; background: transparent; color: #151A21; border: 2px solid #151A21">Nog een aanvraag versturen</button>
+</div>
 </section>
 
 <footer style="background: #151A21; color: #D0D2D5">
