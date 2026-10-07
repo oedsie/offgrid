@@ -11,8 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=202610071200">
-<script src="assets/js/main.js?v=202610071200" defer></script>
+<link rel="stylesheet" href="assets/css/style.css?v=202610071230">
+<script src="assets/js/main.js?v=202610071230" defer></script>
 </head>
 <body>
 <div class="og-root" style="font-family: 'Barlow', 'DIN Alternate', 'Helvetica Neue', sans-serif; color: #151A21; background: #EEF2F6; font-size: 18px; line-height: 1.55">
@@ -404,14 +404,19 @@
 <dd style="margin: 0">Regio Noord-Holland</dd>
 </dl>
 </div>
-<form class="og-reveal" style="flex: 1 1 480px; min-width: 0; background: #FFFFFF; padding: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px">
+<form id="og-contact" class="og-reveal" action="https://formsubmit.co/info@offgridenergiesystemen.nl" method="POST" style="flex: 1 1 480px; min-width: 0; background: #FFFFFF; padding: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px">
+<input type="hidden" name="_subject" value="Nieuwe aanvraag via offgridenergiesystemen.nl">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_next" value="https://www.offgridenergiesystemen.nl/#contact">
+<input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0">
 <div style="display: flex; flex-direction: column; gap: 6px">
-<label for="naam" style="font-weight: 600">Naam</label>
-<input id="naam" name="naam" type="text" autocomplete="name" style="font: inherit; padding: 12px 14px; border: 1px solid #6B7A8C; background: #FFFFFF; min-height: 48px; box-sizing: border-box">
+<label for="naam" style="font-weight: 600">Naam <span aria-hidden="true" style="color: #1A6E9E">*</span></label>
+<input id="naam" name="naam" required type="text" autocomplete="name" style="font: inherit; padding: 12px 14px; border: 1px solid #6B7A8C; background: #FFFFFF; min-height: 48px; box-sizing: border-box">
 </div>
 <div style="display: flex; flex-direction: column; gap: 6px">
-<label for="email" style="font-weight: 600">E-mailadres</label>
-<input id="email" name="email" type="email" autocomplete="email" style="font: inherit; padding: 12px 14px; border: 1px solid #6B7A8C; background: #FFFFFF; min-height: 48px; box-sizing: border-box">
+<label for="email" style="font-weight: 600">E-mailadres <span aria-hidden="true" style="color: #1A6E9E">*</span></label>
+<input id="email" name="email" required type="email" autocomplete="email" style="font: inherit; padding: 12px 14px; border: 1px solid #6B7A8C; background: #FFFFFF; min-height: 48px; box-sizing: border-box">
 </div>
 <div style="display: flex; flex-direction: column; gap: 6px">
 <label for="telefoon" style="font-weight: 600">Telefoonnummer</label>
@@ -435,7 +440,9 @@
 <textarea id="bericht" name="bericht" rows="3" style="font: inherit; padding: 12px 14px; border: 1px solid #6B7A8C; background: #FFFFFF; resize: vertical"></textarea>
 </div>
 <div style="grid-column: 1 / -1">
-<button class="og-btn" type="button" style="font: inherit; font-weight: 700; padding: 16px 28px; min-height: 52px; border: 0; background: #16BE7D; color: #151A21; cursor: pointer">Verstuur aanvraag</button>
+<button id="og-contact-btn" class="og-btn" type="submit" style="font: inherit; font-weight: 700; padding: 16px 28px; min-height: 52px; border: 0; background: #16BE7D; color: #151A21; cursor: pointer">Verstuur aanvraag</button>
+<p style="margin: 12px 0 0; font-size: 15px; color: #3D4A5C">Velden met * zijn verplicht. We gebruiken je gegevens alleen om contact met je op te nemen over je aanvraag.</p>
+<p id="og-contact-status" role="status" aria-live="polite" hidden style="margin: 16px 0 0; padding: 14px 16px; font-weight: 600"></p>
 </div>
 </form>
 </section>
