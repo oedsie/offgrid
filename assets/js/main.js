@@ -246,3 +246,59 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { set(false); btn.focus(); } });
   window.addEventListener('resize', function () { if (window.innerWidth > 900) set(false); });
 })();
+
+/* Off-grid Energiesystemen – contactformulier
+   Aanvragen gaan via FormSubmit naar het adres hieronder. */
+(function () {
+  var ONTVANGER = 'info@offgridenergiesystemen.nl';
+  var form = document.getElementById('og-contact');
+  if (!form || !window.fetch) return;
+  var btn = document.getElementById('og-contact-btn');
+  var status = document.getElementById('og-contact-status');
+  var done = document.getElementById('og-contact-done');
+  document.getElementById('og-contact-again').addEventListener('click', function () {
+    done.hidden = true;
+    form.hidden = false;
+    status.hidden = true;
+    document.getElementById('naam').focus();
+  });
+  function melding(tekst, ok) {
+    status.hidden = false;
+    status.textContent = tekst;
+    status.style.background = ok ? '#E3F6EE' : '#FBE9E9';
+    status.style.color = ok ? '#0E6B47' : '#8A1F1F';
+    status.style.borderLeft = '4px solid ' + (ok ? '#16BE7D' : '#C0392B');
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    var data = {};
+    new FormData(form).forEach(function (v, k) { data[k] = v; });
+    if (data._honey) return; // waarschijnlijk spam
+    btn.disabled = true;
+    var label = btn.textContent;
+    btn.textContent = 'Bezig met versturen…';
+    status.hidden = true;
+    fetch('https://formsubmit.co/ajax/' + ONTVANGER, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (!res.ok || String(res.j.success) !== 'true') throw new Error(res.j.message || 'Versturen mislukt');
+        var voornaam = String(data.naam || '').trim().split(/\s+/)[0];
+        document.getElementById('og-done-naam').textContent = voornaam ? ' ' + voornaam : '';
+        document.getElementById('og-done-mail').textContent = 'Je ontvangt ook een bevestiging per e-mail op ' + data.email + '. Zie je die niet? Kijk dan even in je spammap.';
+        form.reset();
+        form.hidden = true;
+        done.hidden = false;
+        done.focus({ preventScroll: true });
+        done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .catch(function () {
+        melding('Het versturen is niet gelukt. Probeer het later opnieuw of mail ons via ' + ONTVANGER + '.', false);
+      })
+      .then(function () { btn.disabled = false; btn.textContent = label; });
+  });
+})();
+
