@@ -61,4 +61,4 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .js .og-reveal{opacity:0;translate:0 28px;transition:opacity .7s ease,translate .7s cubic-bezier(.2,.7,.2,1)}
 .js .og-reveal.is-visible{opacity:1;translate:0 0}
 @media (prefers-reduced-motion: reduce){.js .og-reveal{opacity:1;translate:none}}
-
+#og-contact-done:not([hidden]){display:flex}
