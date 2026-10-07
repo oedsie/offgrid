@@ -150,7 +150,13 @@
   }
 
   root.querySelectorAll('[data-person]').forEach(function (b) {
-    b.addEventListener('click', function () { show(b.getAttribute('data-person')); });
+    b.addEventListener('click', function () {
+      show(b.getAttribute('data-person'));
+      var panel = document.getElementById('team-panel');
+      if (panel && window.innerWidth < 1000 && panel.getBoundingClientRect().top > window.innerHeight * 0.6) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   });
   show('verhaal');
 })();

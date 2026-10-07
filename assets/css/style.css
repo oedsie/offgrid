@@ -49,6 +49,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .bc-opt[data-type][aria-pressed="true"]::before{content:none}
 /* Team: hotspots en tabs */
 [hidden]{display:none!important}
+.og-tag{display:none;position:absolute;left:50%;bottom:-50px;translate:-50% 0;white-space:nowrap;font-size:15px;font-weight:700;line-height:1.2;padding:5px 12px;background:#151A21;color:#FFFFFF;box-shadow:0 4px 12px rgba(0,0,0,0.25)}
+.og-hot[aria-pressed="true"] .og-tag{display:block}
 #team-person:not([hidden]){display:flex}
 .og-dot{animation:og-pulse 2.4s ease-in-out infinite;box-shadow:0 0 0 4px rgba(22,190,125,0.35);transition:scale .2s ease}
 .og-hot:hover .og-dot{scale:1.35}
