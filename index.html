@@ -11,26 +11,37 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=202610070829">
-<script src="assets/js/main.js?v=202610070829" defer></script>
+<link rel="stylesheet" href="assets/css/style.css?v=202610070908">
+<script src="assets/js/main.js?v=202610070908" defer></script>
 </head>
 <body>
 <div class="og-root" style="font-family: 'Barlow', 'DIN Alternate', 'Helvetica Neue', sans-serif; color: #151A21; background: #EEF2F6; font-size: 18px; line-height: 1.55">
 
 <header style="position: sticky; top: 0; z-index: 20; background: #EEF2F6; border-bottom: 1px solid #D3DCE5">
-<div style="max-width: 1240px; margin: 0 auto; padding: 14px var(--gutter); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<div class="og-hdr-row" style="max-width: 1240px; margin: 0 auto; padding: 14px var(--gutter); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
 <a href="#top" aria-label="Off-grid Energiesystemen, naar boven" style="display: block; line-height: 0">
 <img src="assets/images/logo-licht.png" class="og-hdr-logo" alt="Off-grid Energiesystemen" style="height: 58px; width: auto">
 </a>
-<nav aria-label="Hoofdmenu" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-weight: 600; font-size: 17px">
+<nav class="og-nav" aria-label="Hoofdmenu" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-weight: 600; font-size: 17px">
 <a class="og-navlink" href="#bespaarcheck" style="text-decoration: none; padding: 10px 0">Bespaarcheck</a>
 <a class="og-navlink" href="#diensten" style="text-decoration: none; padding: 10px 0">Diensten</a>
 <a class="og-navlink" href="#werkwijze" style="text-decoration: none; padding: 10px 0">Werkwijze</a>
 <a class="og-navlink" href="#over-ons" style="text-decoration: none; padding: 10px 0">Over ons</a>
 <a class="og-navlink" href="#vragen" style="text-decoration: none; padding: 10px 0">Vragen</a>
 <a class="og-btn og-hdr-cta" href="#contact" style="text-decoration: none; padding: 12px 22px; background: #16BE7D; color: #151A21"><span class="og-lg">Plan een adviesgesprek</span><span class="og-sm">Adviesgesprek</span></a>
+<button type="button" class="og-burger" aria-controls="og-mobile-menu" aria-expanded="false" aria-label="Menu openen" style="width: 48px; height: 48px; padding: 0; align-items: center; justify-content: center; cursor: pointer; background: transparent; color: #151A21; border: 2px solid #151A21"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
 </nav>
 </div>
+<nav id="og-mobile-menu" hidden class="og-mnav" aria-label="Mobiel menu" style="background: #EEF2F6; max-height: calc(100vh - 80px); overflow-y: auto; box-shadow: 0 12px 24px rgba(21,26,33,0.12)">
+<a href="#besparen" style="display: block; padding: 14px var(--gutter); font-size: 19px; font-weight: 600; text-decoration: none; border-top: 1px solid #D3DCE5">Zo ga je besparen</a>
+<a href="#bespaarcheck" style="display: block; padding: 14px var(--gutter); font-size: 19px; font-weight: 600; text-decoration: none; border-top: 1px solid #D3DCE5">Bespaarcheck</a>
+<a href="#diensten" style="display: block; padding: 14px var(--gutter); font-size: 19px; font-weight: 600; text-decoration: none; border-top: 1px solid #D3DCE5">Diensten</a>
+<a href="#werkwijze" style="display: block; padding: 14px var(--gutter); font-size: 19px; font-weight: 600; text-decoration: none; border-top: 1px solid #D3DCE5">Werkwijze</a>
+<a href="#normen" style="display: block; padding: 14px var(--gutter); font-size: 19px; font-weight: 600; text-decoration: none; border-top: 1px solid #D3DCE5">Veiligheid en normen</a>
+<a href="#over-ons" style="display: block; padding: 14px var(--gutter); font-size: 19px; font-weight: 600; text-decoration: none; border-top: 1px solid #D3DCE5">Over ons</a>
+<a href="#vragen" style="display: block; padding: 14px var(--gutter); font-size: 19px; font-weight: 600; text-decoration: none; border-top: 1px solid #D3DCE5">Veelgestelde vragen</a>
+<a href="#contact" style="display: block; padding: 14px var(--gutter); font-size: 19px; font-weight: 600; text-decoration: none; border-top: 1px solid #D3DCE5">Contact</a>
+</nav>
 </header>
 
 <div style="position: relative; overflow: hidden; background: linear-gradient(120deg, #EEF6DE 0%, #E4F2EE 35%, #E0EEF8 70%, #F4F8FB 100%)">

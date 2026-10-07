@@ -1,7 +1,7 @@
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0}
 img,svg{max-width:100%}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
 a{color:#151A21}a:hover{color:#1A6E9E}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #1A6E9E;outline-offset:3px}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
@@ -18,10 +18,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .og-draw{stroke-dasharray:1;animation:og-draw 4s ease-in-out infinite alternate}
 .og-dia{transform-box:fill-box;transform-origin:center;animation:og-dia 3.2s ease-in-out infinite}
 .og-root{--gutter:32px}
-@media (max-width: 900px){.og-navlink{display:none}}
+.og-burger{display:none}
+@media (min-width: 901px){.og-mnav{display:none!important}}
+@media (max-width: 900px){.og-navlink{display:none}.og-burger{display:inline-flex}.og-nav{gap:8px!important}}
 .og-sm{display:none}
-@media (max-width: 600px){.og-lg{display:none}.og-sm{display:inline}.og-root{--gutter:20px}.og-hdr-logo{height:38px!important}.og-hdr-cta{padding:10px 14px!important}}
-@media (max-width: 380px){.og-hdr-logo{height:32px!important}}
+@media (max-width: 600px){.og-lg{display:none}.og-sm{display:inline}.og-root{--gutter:20px}.og-hdr-logo{height:32px!important}.og-hdr-cta{padding:9px 10px!important;font-size:15px}.og-burger{width:44px!important;height:44px!important}.og-nav{gap:6px!important}.og-hdr-row{gap:10px!important}}
+@media (max-width: 380px){.og-hdr-logo{height:27px!important}}
 .og-hot{transition:border-color .2s ease}
 .og-hot span{transition:scale .2s ease}
 .og-hot:hover span{scale:1.35!important}

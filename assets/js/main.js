@@ -160,3 +160,21 @@
   });
   show('verhaal');
 })();
+
+/* Off-grid Energiesystemen – mobiel menu */
+(function () {
+  var btn = document.querySelector('.og-burger');
+  var menu = document.getElementById('og-mobile-menu');
+  if (!btn || !menu) return;
+  var path = btn.querySelector('path');
+  function set(open) {
+    menu.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Menu sluiten' : 'Menu openen');
+    path.setAttribute('d', open ? 'M6 6l12 12M18 6L6 18' : 'M4 7h16M4 12h16M4 17h16');
+  }
+  btn.addEventListener('click', function () { set(menu.hidden); });
+  menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { set(false); btn.focus(); } });
+  window.addEventListener('resize', function () { if (window.innerWidth > 900) set(false); });
+})();
